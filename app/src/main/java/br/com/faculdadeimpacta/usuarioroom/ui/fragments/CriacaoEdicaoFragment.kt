@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.faculdadeimpacta.usuarioroom.R
 import br.com.faculdadeimpacta.usuarioroom.data.models.Usuario
@@ -41,6 +42,7 @@ class CriacaoEdicaoFragment : Fragment() {
             binding.buttonSalvar.setOnClickListener {
                 val novoUsuario = Usuario(nome = binding.editTextText.text.toString().trim())
                 viewModel.inserir(novoUsuario)
+                findNavController().popBackStack()
             }
         } else {
             viewModel.usuario.observe(viewLifecycleOwner) { usuario ->
@@ -49,6 +51,7 @@ class CriacaoEdicaoFragment : Fragment() {
                 binding.buttonSalvar.setOnClickListener {
                     usuarioBuscado?.nome = binding.editTextText.text.toString().trim()
                     viewModel.atualizar(usuarioBuscado!!)
+                    findNavController().popBackStack()
                 }
             }
             viewModel.getUsuario(usuarioId)

@@ -20,7 +20,7 @@
             android:id="@+id/textViewId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="#@{Integer.toString(usuario.id)}"
+            android:text="@{Integer.toString(usuario.id)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="#Id" />
