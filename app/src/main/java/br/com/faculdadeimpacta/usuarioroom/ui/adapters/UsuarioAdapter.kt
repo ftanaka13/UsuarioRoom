@@ -7,14 +7,21 @@ import androidx.recyclerview.widget.RecyclerView.Recycler
 import br.com.faculdadeimpacta.usuarioroom.data.models.Usuario
 import br.com.faculdadeimpacta.usuarioroom.databinding.UsuarioItemBinding
 
-class UsuarioAdapter(private val listaUsuario: List<Usuario>) :
+class UsuarioAdapter(
+    private val listaUsuario: List<Usuario>,
+    private val acaoFavorito: (Usuario) -> Unit
+) :
     RecyclerView.Adapter<UsuarioAdapter.UsuarioVH>() {
 
     inner class UsuarioVH(private val binding: UsuarioItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(usuario: Usuario) {
             binding.usuario = usuario
-            binding.imageViewFavorito.isEnabled = usuario.favorito
+            binding.imageViewFavorito.isSelected = usuario.favorito
+            binding.imageViewFavorito.setOnClickListener {
+                usuario.favorito = !usuario.favorito
+                acaoFavorito(usuario)
+            }
         }
     }
 

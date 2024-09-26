@@ -37,7 +37,9 @@ class ListaFragment : Fragment() {
         super.onStart()
 
         viewModel.listaUsuarios.observe(viewLifecycleOwner) { lista ->
-            binding.recyclerView.adapter = UsuarioAdapter(lista)
+            binding.recyclerView.adapter = UsuarioAdapter(lista) { usuario ->
+                viewModel.atualizar(usuario)
+            }
             binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         }
 
