@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class Usuario(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     var nome: String,
-    var favorito: Boolean
+    var favorito: Boolean = false
 )
