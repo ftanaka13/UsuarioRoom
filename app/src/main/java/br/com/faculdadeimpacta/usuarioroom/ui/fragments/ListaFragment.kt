@@ -42,8 +42,10 @@ class ListaFragment : Fragment() {
             val direction = ListaFragmentDirections.actionListaFragmentToCriacaoEdicaoFragment(id)
             findNavController().navigate(direction)
         }
+        val acaoExclusao = { usuario: Usuario -> viewModel.deletar(usuario) }
         viewModel.listaUsuarios.observe(viewLifecycleOwner) { lista ->
-            binding.recyclerView.adapter = UsuarioAdapter(lista, acaoFavoritar, acaoEdicao)
+            binding.recyclerView.adapter =
+                UsuarioAdapter(lista, acaoFavoritar, acaoEdicao, acaoExclusao)
             binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         }
 
