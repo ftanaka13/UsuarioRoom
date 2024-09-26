@@ -6,8 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.com.faculdadeimpacta.usuarioroom.R
+import br.com.faculdadeimpacta.usuarioroom.data.repositories.UsuarioRepository
+import br.com.faculdadeimpacta.usuarioroom.data.sources.local.database.RoomDB
 
 class MainActivity : AppCompatActivity() {
+
+    private val roomDB by lazy {
+        RoomDB.getInstance(this)
+    }
+    private val usuarioDAO by lazy {
+        roomDB.getUsuarioDAO()
+    }
+    val usuarioRepository by lazy {
+        UsuarioRepository(usuarioDAO)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
