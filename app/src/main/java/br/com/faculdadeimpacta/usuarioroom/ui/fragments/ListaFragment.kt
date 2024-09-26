@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.faculdadeimpacta.usuarioroom.R
+import br.com.faculdadeimpacta.usuarioroom.data.models.Usuario
 import br.com.faculdadeimpacta.usuarioroom.databinding.FragmentListaBinding
 import br.com.faculdadeimpacta.usuarioroom.ui.activities.MainActivity
 import br.com.faculdadeimpacta.usuarioroom.ui.adapters.UsuarioAdapter
@@ -36,10 +37,13 @@ class ListaFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val acaoFavoritar = { usuario: Usuario -> viewModel.atualizar(usuario) }
+        val acaoEdicao = { id: Int ->
+            val direction = ListaFragmentDirections.actionListaFragmentToCriacaoEdicaoFragment(id)
+            findNavController().navigate(direction)
+        }
         viewModel.listaUsuarios.observe(viewLifecycleOwner) { lista ->
-            binding.recyclerView.adapter = UsuarioAdapter(lista) { usuario ->
-                viewModel.atualizar(usuario)
-            }
+            binding.recyclerView.adapter = UsuarioAdapter(lista, acaoFavoritar, acaoEdicao)
             binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         }
 

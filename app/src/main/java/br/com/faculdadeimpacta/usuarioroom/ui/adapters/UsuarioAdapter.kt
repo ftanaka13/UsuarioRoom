@@ -9,7 +9,8 @@ import br.com.faculdadeimpacta.usuarioroom.databinding.UsuarioItemBinding
 
 class UsuarioAdapter(
     private val listaUsuario: List<Usuario>,
-    private val acaoFavorito: (Usuario) -> Unit
+    private val acaoFavorito: (Usuario) -> Unit,
+    private val acaoEdicao: (Int) -> Unit
 ) :
     RecyclerView.Adapter<UsuarioAdapter.UsuarioVH>() {
 
@@ -21,6 +22,9 @@ class UsuarioAdapter(
             binding.imageViewFavorito.setOnClickListener {
                 usuario.favorito = !usuario.favorito
                 acaoFavorito(usuario)
+            }
+            binding.imageViewEdicao.setOnClickListener {
+                acaoEdicao(usuario.id)
             }
         }
     }

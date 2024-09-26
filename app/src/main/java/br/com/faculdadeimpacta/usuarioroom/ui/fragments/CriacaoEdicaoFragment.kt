@@ -47,10 +47,9 @@ class CriacaoEdicaoFragment : Fragment() {
         } else {
             viewModel.usuario.observe(viewLifecycleOwner) { usuario ->
                 binding.editTextText.setText(usuario?.nome)
-                var usuarioBuscado = usuario
                 binding.buttonSalvar.setOnClickListener {
-                    usuarioBuscado?.nome = binding.editTextText.text.toString().trim()
-                    viewModel.atualizar(usuarioBuscado!!)
+                    usuario?.nome = binding.editTextText.text.toString().trim()
+                    viewModel.atualizar(usuario!!)
                     findNavController().popBackStack()
                 }
             }
